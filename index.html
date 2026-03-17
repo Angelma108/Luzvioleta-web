@@ -4,43 +4,522 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luz Violeta - Tienda Esotérica y Yoga en Mataró</title>
-    <meta name="description" content="Luz Violeta: minerales, joyas, esoterismo y clases de yoga en Mataró. Tu espacio de bienestar y armonía.">
+    <meta name="description" content="Luz Violeta: minerales, joyas artesanales, esoterismo y clases de yoga en Mataró. Tu espacio de bienestar y armonía.">
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔮</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        :root {
+            --violet: #7C3AED;
+            --violet-light: #A78BFA;
+            --violet-dark: #5B21B6;
+            --accent: #F59E0B;
+            --dark: #111827;
+            --gray: #6B7280;
+            --light: #F8FAFC;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--white);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(124, 58, 237, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--violet);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--violet);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #F5F3FF 0%, #FDF2F8 50%, #FFFBEB 100%);
+            padding: 120px 24px 80px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--gray);
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--violet);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--dark);
+            border: 2px solid var(--dark);
+            margin-left: 12px;
+        }
+
+        .btn-outline:hover {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        /* Sections Common */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.75rem;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Intro */
+        .intro {
+            background: var(--light);
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .intro-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+        }
+
+        .intro-text p {
+            color: var(--gray);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        .intro-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Product Sections */
+        .products-section {
+            background: var(--white);
+        }
+
+        .products-section:nth-child(even) {
+            background: var(--light);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-card.wide {
+            grid-column: span 2;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 24px;
+        }
+
+        .product-info h3 {
+            font-size: 1.35rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .product-info p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Yoga Section */
+        .yoga-section {
+            background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%);
+        }
+
+        .yoga-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .yoga-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+        }
+
+        .yoga-content p {
+            color: var(--gray);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        .yoga-schedule {
+            margin-top: 32px;
+            background: var(--white);
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .yoga-schedule h3 {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+            color: var(--violet);
+        }
+
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .yoga-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--dark);
+            color: var(--white);
+            padding: 80px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .contact-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-item p {
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .contact-item a {
+            color: var(--violet-light);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: #0A0A0A;
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            opacity: 0.7;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .intro-grid,
+            .yoga-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .intro-image,
+            .yoga-image {
+                order: -1;
+            }
+
+            .product-card.wide {
+                grid-column: span 1;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-desc {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 12px;
+            }
+
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="container">
-            <nav class="navbar">
+            <nav>
                 <a href="#" class="logo">Luz Violeta</a>
                 <ul class="nav-links">
                     <li><a href="#inicio">Inicio</a></li>
                     <li><a href="#tienda">Tienda</a></li>
-                    <li><a href="yoga.html">Yoga</a></li>
-                    <li><a href="#contacto" class="cta-btn">Contactar</a></li>
+                    <li><a href="#yoga">Yoga</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
                 </ul>
-                <div class="menu-toggle">☰</div>
+                <button class="mobile-menu-btn">☰</button>
             </nav>
         </div>
     </header>
 
     <!-- Hero -->
-    <section id="inicio" class="hero">
-        <div class="hero-bg"></div>
-        <div class="container">
-            <div class="hero-content">
-                <p class="hero-subtitle">Tu espacio de bienestar en Mataró</p>
-                <h1>Minerales · Joyas · Yoga</h1>
-                <p class="hero-description">Descubre nuestra colección de minerales auténticos, joyas artesanales y clases de bienestar.</p>
-                <div class="hero-buttons">
-                    <a href="#tienda" class="btn btn-primary">Ver Tienda</a>
-                    <a href="yoga.html" class="btn btn-outline">Clases de Yoga</a>
-                </div>
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Tu Espacio de Bienestar</h1>
+            <p>Minerales auténticos, joyas artesanales y clases de yoga en Mataró. Descubre todo lo que necesitas para tu armonía personal.</p>
+            <div class="hero-buttons">
+                <a href="#tienda" class="btn btn-primary">Ver Tienda</a>
+                <a href="#yoga" class="btn btn-outline">Clases de Yoga</a>
             </div>
         </div>
     </section>
@@ -48,128 +527,84 @@
     <!-- Intro -->
     <section class="intro">
         <div class="container">
-            <div class="intro-content">
-                <div class="intro-text fade-in">
+            <div class="intro-grid">
+                <div class="intro-text">
                     <h2>Bienvenido a Luz Violeta</h2>
                     <p>En nuestro espacio encontrarás todo lo que necesitas para tu bienestar y armonía personal. Cada mineral, cada objeto ha sido seleccionado con cuidado e intención.</p>
                     <p>Déjate guiar por tus sentidos: la belleza de los minerales, los aromas de los inciensos, la textura de los textiles, el sonido de los cuencos tibetanos...</p>
-                    
-                    <div class="intro-features">
-                        <div class="feature">
-                            <div class="feature-icon">💎</div>
-                            <div>
-                                <h4>Minerales</h4>
-                                <p>Piedras naturales de calidad</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">🧘</div>
-                            <div>
-                                <h4>Yoga</h4>
-                                <p>Clases para todos los niveles</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">🔮</div>
-                            <div>
-                                <h4>Esoterismo</h4>
-                                <p>Tarot, reiki y sanación</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">📿</div>
-                            <div>
-                                <h4>Joyas</h4>
-                                <p>Diseño artesanal único</p>
-                            </div>
-                        </div>
-                    </div>
+                    <a href="#tienda" class="btn btn-primary" style="margin-top: 20px;">Explorar Tienda</a>
                 </div>
-                <div class="intro-image fade-in">
+                <div class="intro-image">
                     <img src="img/tienda.jpg" alt="Tienda Luz Violeta">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección Minerales -->
-    <section class="product-section" id="minerales">
+    <!-- Minerales -->
+    <section class="products-section" id="minerales">
         <div class="container">
-            <div class="section-header fade-in">
+            <div class="section-header">
                 <h2>Minerales</h2>
                 <p>Piedras naturales seleccionadas para tu energía</p>
             </div>
-            <div class="product-grid">
-                <div class="product-card fade-in">
-                    <img src="img/minerales.jpg" alt="Colección de minerales">
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="img/minerales.jpg" alt="Colección de minerales" class="product-image">
                     <div class="product-info">
                         <h3>Colección de Minerales</h3>
                         <p>Cuarzos, amatistas, pirítas y más</p>
                     </div>
                 </div>
-                <div class="product-card fade-in">
-                    <img src="img/geodas.jpg" alt="Geodas">
+                <div class="product-card">
+                    <img src="img/geodas.jpg" alt="Geodas" class="product-image">
                     <div class="product-info">
                         <h3>Geodas</h3>
                         <p>Piezas únicas de colección</p>
                     </div>
                 </div>
-                <div class="product-card fade-in">
-                    <img src="img/mineralrodado.jpg" alt="Minerales rodados">
+                <div class="product-card">
+                    <img src="img/mineralrodado.jpg" alt="Minerales rodados" class="product-image">
                     <div class="product-info">
                         <h3>Minerales Rodados</h3>
                         <p>Para llevar contigo</p>
                     </div>
                 </div>
-                <div class="product-card wide fade-in">
-                    <img src="img/vitrinaminerales.jpg" alt="Vitrina de minerales">
+                <div class="product-card wide">
+                    <img src="img/vitrinaminerales.jpg" alt="Vitrina de minerales" class="product-image">
                     <div class="product-info">
                         <h3>Vitrina de Minerales</h3>
                         <p>Descubre nuestras piezas en tienda</p>
-                    </div>
-                </div>
-                <div class="product-card fade-in">
-                    <img src="img/minerales2.jpg" alt="Más minerales">
-                    <div class="product-info">
-                        <h3>Cristales</h3>
-                        <p>Para sanación y meditación</p>
-                    </div>
-                </div>
-                <div class="product-card fade-in">
-                    <img src="img/minerales3.jpg" alt="Variedad de minerales">
-                    <div class="product-info">
-                        <h3>Variedad Única</h3>
-                        <p>Cada pieza es especial</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección Joyas -->
-    <section class="product-section alt" id="joyas">
+    <!-- Joyas -->
+    <section class="products-section" id="joyas">
         <div class="container">
-            <div class="section-header fade-in">
+            <div class="section-header">
                 <h2>Joyas Artesanales</h2>
-                <p>Diseños únicos hechos a mano</p>
+                <p>Diseños únicos hechos a mano con piedras naturales</p>
             </div>
-            <div class="product-grid">
-                <div class="product-card fade-in">
-                    <img src="img/colgantes.jpg" alt="Colgantes">
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="img/colgantes.jpg" alt="Colgantes" class="product-image">
                     <div class="product-info">
                         <h3>Colgantes</h3>
                         <p>Con piedras naturales</p>
                     </div>
                 </div>
-                <div class="product-card fade-in">
-                    <img src="img/figurasycollares.jpg" alt="Figuras y collares">
+                <div class="product-card">
+                    <img src="img/figurasycollares.jpg" alt="Figuras y collares" class="product-image">
                     <div class="product-info">
                         <h3>Figuras y Collares</h3>
                         <p>Diseños exclusivos</p>
                     </div>
                 </div>
-                <div class="product-card wide fade-in">
-                    <img src="img/vitrinacolgantes.jpg" alt="Vitrina de colgantes">
+                <div class="product-card wide">
+                    <img src="img/vitrinacolgantes.jpg" alt="Vitrina de joyas" class="product-image">
                     <div class="product-info">
                         <h3>Nuestra Selección</h3>
                         <p>Joyas que conectan con tu energía</p>
@@ -179,112 +614,122 @@
         </div>
     </section>
 
-    <!-- Sección Esoterismo -->
-    <section class="product-section" id="esoterismo">
+    <!-- Esoterismo -->
+    <section class="products-section" id="esoterismo">
         <div class="container">
-            <div class="section-header fade-in">
+            <div class="section-header">
                 <h2>Esoterismo</h2>
                 <p>Todo para tu práctica espiritual</p>
             </div>
-            <div class="product-grid">
-                <div class="product-card fade-in">
-                    <img src="img/tarotsyoraculos.jpg" alt="Tarots y oráculos">
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="img/tarotsyoraculos.jpg" alt="Tarot y oráculos" class="product-image">
                     <div class="product-info">
                         <h3>Tarot y Oráculos</h3>
                         <p>Barajas para consulta</p>
                     </div>
                 </div>
-                <div class="product-card fade-in">
-                    <img src="img/incienso.jpg" alt="Inciensos">
+                <div class="product-card">
+                    <img src="img/incienso.jpg" alt="Inciensos" class="product-image">
                     <div class="product-info">
                         <h3>Inciensos</h3>
                         <p>Aromas naturales</p>
                     </div>
                 </div>
-                <div class="product-card fade-in">
-                    <img src="img/incienso2.jpg" alt="Más inciensos">
-                    <div class="product-info">
-                        <h3>Variedad de Inciensos</h3>
-                        <p>Para cada momento</p>
-                    </div>
-                </div>
-                <div class="product-card fade-in">
-                    <img src="img/inciensoclose.jpg" alt="Detalle inciensos">
+                <div class="product-card">
+                    <img src="img/inciensoclose.jpg" alt="Inciensos premium" class="product-image">
                     <div class="product-info">
                         <h3>Inciensos Premium</h3>
                         <p>Calidad superior</p>
                     </div>
                 </div>
-                <div class="product-card wide fade-in">
-                    <img src="img/cuencos.jpg" alt="Cuencos">
+                <div class="product-card wide">
+                    <img src="img/cuencos.jpg" alt="Cuencos tibetanos" class="product-image">
                     <div class="product-info">
                         <h3>Cuencos Tibetanos</h3>
                         <p>Sonido sanador</p>
                     </div>
                 </div>
-                <div class="product-card fade-in">
-                    <img src="img/libros.jpg" alt="Libros">
+                <div class="product-card">
+                    <img src="img/libros.jpg" alt="Libros esotéricos" class="product-image">
                     <div class="product-info">
                         <h3>Libros Esotéricos</h3>
                         <p>Conocimiento ancestral</p>
                     </div>
                 </div>
-                <div class="product-card fade-in">
-                    <img src="img/estatua.jpg" alt="Estatuas">
+                <div class="product-card">
+                    <img src="img/estatua.jpg" alt="Estatuas" class="product-image">
                     <div class="product-info">
                         <h3>Estatuas</h3>
                         <p>Figuras decorativas</p>
-                    </div>
-                </div>
-                <div class="product-card fade-in">
-                    <img src="img/cabeza.jpg" alt="Buda">
-                    <div class="product-info">
-                        <h3>Arte Espiritual</h3>
-                        <p>Piezas únicas</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección Yoga Preview -->
-    <section class="yoga-preview" id="yoga">
+    <!-- Yoga -->
+    <section class="yoga-section" id="yoga">
         <div class="container">
-            <div class="yoga-content">
-                <div class="yoga-text fade-in">
+            <div class="yoga-grid">
+                <div class="yoga-content">
                     <h2>Clases de Yoga</h2>
-                    <p>Encuentra tu equilibrio en nuestro espacio dedicado al bienestar. Ofrecemos clases de Hatha Yoga, Yoga Nidra, Meditación guiada y más.</p>
-                    <p>Con grupos reducidos garantizamos atención personalizada para todos los niveles.</p>
-                    <a href="yoga.html" class="btn btn-primary">Ver Horarios</a>
+                    <p>Encuentra tu equilibrio en nuestro espacio dedicado al bienestar. Ofrecemos clases de Hatha Yoga, Yoga Nidra y Meditación guiada.</p>
+                    <p>Con grupos reducidos garantizamos atención personalizada para todos los niveles. Disponemos de todo el material necesario.</p>
+                    
+                    <div class="yoga-schedule">
+                        <h3>Horarios Semanales</h3>
+                        <div class="schedule-item">
+                            <span>Hatha Yoga</span>
+                            <span>Lun, Mié, Vie - 9:30</span>
+                        </div>
+                        <div class="schedule-item">
+                            <span>Yoga Nidra</span>
+                            <span>Mar, Jue - 19:00</span>
+                        </div>
+                        <div class="schedule-item">
+                            <span>Meditación</span>
+                            <span>Sábados - 10:00</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 24px; background: var(--white); padding: 20px; border-radius: 12px; box-shadow: var(--shadow);">
+                        <h4 style="color: var(--violet); margin-bottom: 12px;">Precios</h4>
+                        <p style="margin-bottom: 8px;"><strong>Clase suelta:</strong> 12€</p>
+                        <p style="margin-bottom: 8px;"><strong>Bono 5 clases:</strong> 50€</p>
+                        <p><strong>Bono 10 clases:</strong> 90€</p>
+                    </div>
+
+                    <a href="https://wa.me/34937994741?text=Hola, me gustaría reservar una clase de yoga" class="btn btn-primary" style="margin-top: 24px;">Reservar Clase</a>
                 </div>
-                <div class="yoga-image fade-in">
+                <div class="yoga-image">
                     <img src="img/salayoga.jpg" alt="Sala de yoga">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Info / Contacto -->
-    <section id="contacto" class="info">
+    <!-- Contacto -->
+    <section class="contact-section" id="contacto">
         <div class="container">
-            <div class="info-grid">
-                <div class="info-card">
-                    <div class="info-icon">📍</div>
-                    <h3>Dónde Estamos</h3>
-                    <p>Carrer d'Argentona, 14<br>08303 Mataró, Barcelona</p>
-                    <a href="https://www.google.com/maps/place/Carrer+d'Argentona+14,+Matar%C3%B3" target="_blank">Ver mapa →</a>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>📍 Ubicación</h3>
+                    <p>Carrer d'Argentona, 14</p>
+                    <p>08303 Mataró, Barcelona</p>
+                    <a href="https://www.google.com/maps/place/Carrer+d'Argentona+14,+Matar%C3%B3" target="_blank">Ver en Google Maps →</a>
                 </div>
-                <div class="info-card">
-                    <div class="info-icon">🕐</div>
-                    <h3>Horarios</h3>
-                    <p>Lunes - Viernes<br>9:30 - 13:30 | 15:00 - 18:00</p>
-                    <p>Sábados: 1º de cada mes<br>Domingo: Cerrado</p>
+                <div class="contact-item">
+                    <h3>📞 Contacto</h3>
+                    <p>Teléfono: 937 99 47 41</p>
+                    <p><a href="https://wa.me/34937994741">WhatsApp →</a></p>
+                    <p><a href="https://instagram.com/luzvioleta.es" target="_blank">Instagram →</a></p>
                 </div>
-                <div class="info-card">
-                    <div class="info-icon">📱</div>
-                    <h3>Contacto</h3>
-                    <p>📞 937 99 47 41</p>
-                    <a href="https://wa.me/34937994741">Escríbenos →</a>
+                <div class="contact-item">
+                    <h3>🕐 Horario</h3>
+                    <p>Lunes a Viernes</p>
+                    <p>9:30 - 13:30 | 15:00 - 18:00</p>
+                    <p>Sábados: 1º de cada mes</p>
                 </div>
             </div>
         </div>
@@ -294,33 +739,25 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand">
-                    <a href="#" class="logo">Luz Violeta</a>
-                    <p>Tu espacio de bienestar y armonía en Mataró.</p>
+                <div>
+                    <a href="#" class="footer-logo">Luz Violeta</a>
+                    <p class="footer-desc">Tu espacio de bienestar y armonía en Mataró. Minerales, joyas artesanales y clases de yoga.</p>
                 </div>
-                <div class="footer-section">
+                <div class="footer-links">
                     <h4>Navegación</h4>
                     <ul>
                         <li><a href="#inicio">Inicio</a></li>
                         <li><a href="#tienda">Tienda</a></li>
-                        <li><a href="yoga.html">Yoga</a></li>
+                        <li><a href="#yoga">Yoga</a></li>
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Servicios</h4>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
                     <ul>
-                        <li><a href="#minerales">Minerales</a></li>
-                        <li><a href="#joyas">Joyas</a></li>
-                        <li><a href="#esoterismo">Esoterismo</a></li>
-                        <li><a href="yoga.html">Yoga</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Síguenos</h4>
-                    <ul>
-                        <li><a href="https://instagram.com/luzvioleta.es" target="_blank">Instagram</a></li>
+                        <li><a href="tel:937994741">937 99 47 41</a></li>
                         <li><a href="https://wa.me/34937994741">WhatsApp</a></li>
+                        <li><a href="https://instagram.com/luzvioleta.es">Instagram</a></li>
                     </ul>
                 </div>
             </div>
@@ -330,6 +767,25 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
