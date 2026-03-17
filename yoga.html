@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga - Luz Violeta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --violeta: #9d4edd;
+            --violeta-oscuro: #7b2cbf;
+            --blanco: #fafafa;
+            --gris: #4a4a5a;
+            --negro: #1a1a2e;
+        }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--blanco);
+            color: var(--negro);
+            line-height: 1.7;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(157,78,221,0.1);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--violeta);
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        .nav-links a {
+            color: var(--gris);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--violeta); }
+        .nav-links a.cta-btn {
+            background: var(--violeta);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+        
+        /* Hero */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(26,26,46,0.4), rgba(26,26,46,0.5)), url('img/salayogaclose.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 64px;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        .hero p { font-size: 20px; opacity: 0.9; }
+        
+        /* Horarios Section */
+        .horarios {
+            padding: 100px 0;
+            background: white;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            color: var(--violeta);
+            margin-bottom: 15px;
+        }
+        .section-header p { color: var(--gris); font-size: 18px; }
+        
+        .horario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .horario-card {
+            background: var(--blanco);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(157,78,221,0.1);
+            transition: transform 0.3s;
+        }
+        .horario-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(157,78,221,0.15);
+        }
+        .horario-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: var(--violeta);
+            margin-bottom: 20px;
+        }
+        .horario-dia {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(157,78,221,0.1);
+        }
+        .horario-dia:last-child { border-bottom: none; }
+        .dia-nombre {
+            font-weight: 600;
+            color: var(--negro);
+            margin-bottom: 5px;
+        }
+        .dia-hora {
+            color: var(--gris);
+            font-size: 15px;
+        }
+        .profesor {
+            font-size: 14px;
+            color: var(--violeta);
+            margin-top: 5px;
+        }
+        
+        /* Info Cards */
+        .info-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--violeta-oscuro), var(--violeta));
+            color: white;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .info-card {
+            text-align: center;
+        }
+        .info-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        .info-card p { opacity: 0.9; margin-bottom: 10px; }
+        .info-card a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            transition: opacity 0.3s;
+        }
+        .info-card a:hover { opacity: 1; }
+        
+        /* Sala */
+        .sala {
+            padding: 100px 0;
+            background: white;
+        }
+        .sala-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .sala-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            color: var(--violeta);
+            margin-bottom: 25px;
+        }
+        .sala-text p {
+            color: var(--gris);
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+        .sala-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .sala-images img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .sala-images img:first-child { transform: translateY(-20px); }
+        
+        /* Admin Panel */
+        .admin-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+        .admin-btn {
+            background: var(--violeta);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 5px 20px rgba(157,78,221,0.3);
+            transition: all 0.3s;
+        }
+        .admin-btn:hover {
+            background: var(--violeta-oscuro);
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .modal-header h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: var(--violeta);
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--gris);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--negro);
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(157,78,221,0.2);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+        .clase-input {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        .btn {
+            background: var(--violeta);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+        .btn:hover { background: var(--violeta-oscuro); }
+        .btn-secondary {
+            background: var(--gris);
+            margin-left: 10px;
+        }
+        .btn-danger {
+            background: #e74c3c;
+            padding: 8px 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--negro);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-brand .logo {
+            color: white;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .footer-brand p { opacity: 0.7; }
+        .footer-section h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .footer-section ul { list-style: none; }
+        .footer-section li { margin-bottom: 10px; }
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-section a:hover { color: white; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+            opacity: 0.6;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 42px; }
+            .nav-links { display: none; }
+            .info-grid { grid-template-columns: 1fr; }
+            .sala-content { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .clase-input { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Luz Violeta</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="index.html#tienda">Tienda</a></li>
+                    <li><a href="yoga.html">Yoga</a></li>
+                    <li><a href="index.html#contacto" class="cta-btn">Contactar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div>
+            <h1>Yoga</h1>
+            <p>Encuentra tu equilibrio en nuestro espacio</p>
+        </div>
+    </section>
+
+    <!-- Horarios -->
+    <section class="horarios" id="horarios">
+        <div class="container">
+            <div class="section-header">
+                <h2>Horarios de Clases</h2>
+                <p>Consulta nuestros horarios semanales</p>
+            </div>
+            <div class="horario-grid" id="horarioContainer">
+                <!-- Se carga dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Info -->
+    <section class="info-section">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>📍 Ubicación</h3>
+                    <p>Carrer d'Argentona, 14</p>
+                    <p>08303 Mataró, Barcelona</p>
+                    <a href="https://www.google.com/maps/place/Carrer+d'Argentona+14,+Matar%C3%B3" target="_blank">Ver mapa →</a>
+                </div>
+                <div class="info-card">
+                    <h3>📞 Contacto</h3>
+                    <p>Tel: 937 99 47 41</p>
+                    <a href="https://wa.me/34937994741">WhatsApp →</a>
+                </div>
+                <div class="info-card">
+                    <h3>💶 Precios</h3>
+                    <p>Clase suelta: 12€</p>
+                    <p>Bono 5 clases: 50€</p>
+                    <p>Bono 10 clases: 90€</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sala -->
+    <section class="sala">
+        <div class="container">
+            <div class="sala-content">
+                <div class="sala-text">
+                    <h2>Nuestra Sala</h2>
+                    <p>Un espacio cálido y acogedor diseñado para tu práctica de yoga. Con capacidad para grupos reducidos, garantizamos atención personalizada.</p>
+                    <p>Disponemos de todo el material necesario: esterillas, bloques, correas, mantas y cojines de meditación.</p>
+                    <p>La sala está preparada para distintos tipos de práctica: Hatha Yoga, Yoga Nidra, Meditación guiada y Talleres especializados.</p>
+                </div>
+                <div class="sala-images">
+                    <img src="img/salayoga.jpg" alt="Sala de yoga">
+                    <img src="img/salayogaclose.jpg" alt="Detalle sala">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">Luz Violeta</a>
+                    <p>Tu espacio de bienestar en Mataró.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="index.html#tienda">Tienda</a></li>
+                        <li><a href="yoga.html">Yoga</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="tel:937994741">937 99 47 41</a></li>
+                        <li><a href="https://wa.me/34937994741">WhatsApp</a></li>
+                        <li><a href="https://instagram.com/luzvioleta.es">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Luz Violeta. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel">
+        <button class="admin-btn" onclick="openAdmin()">⚙️ Editar Horarios</button>
+    </div>
+
+    <!-- Modal Admin -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Panel de Administración</h3>
+                <button class="close-btn" onclick="closeAdmin()">×</button>
+            </div>
+            <div id="adminForm">
+                <p>Contraseña: <input type="password" id="adminPass" placeholder="••••"></p>
+                <button class="btn" onclick="checkPass()">Acceder</button>
+            </div>
+            <div id="adminContent" style="display:none;">
+                <h4>Editar Horarios</h4>
+                <div id="clasesEdit"></div>
+                <button class="btn" onclick="addClase()">+ Añadir Clase</button>
+                <button class="btn btn-secondary" onclick="saveHorarios()">💾 Guardar</button>
+                <button class="btn btn-secondary" onclick="exportData()">📤 Exportar</button>
+                <input type="file" id="importFile" style="display:none" onchange="importData(event)">
+                <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">📥 Importar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos por defecto
+        const defaultHorarios = [
+            {
+                nombre: "Hatha Yoga",
+                horarios: [
+                    { dia: "Lunes", hora: "9:30 - 10:45", profesor: "María" },
+                    { dia: "Miércoles", hora: "9:30 - 10:45", profesor: "María" },
+                    { dia: "Viernes", hora: "9:30 - 10:45", profesor: "María" }
+                ]
+            },
+            {
+                nombre: "Yoga Nidra",
+                horarios: [
+                    { dia: "Martes", hora: "19:00 - 20:00", profesor: "Ana" },
+                    { dia: "Jueves", hora: "19:00 - 20:00", profesor: "Ana" }
+                ]
+            },
+            {
+                nombre: "Meditación",
+                horarios: [
+                    { dia: "Sábados", hora: "10:00 - 11:00", profesor: "Lucía" }
+                ]
+            }
+        ];
+
+        // Cargar horarios
+        let horarios = JSON.parse(localStorage.getItem('luzvioleta-horarios')) || defaultHorarios;
+
+        function renderHorarios() {
+            const container = document.getElementById('horarioContainer');
+            container.innerHTML = horarios.map(clase => `
+                <div class="horario-card">
+                    <h3>${clase.nombre}</h3>
+                    ${clase.horarios.map(h => `
+                        <div class="horario-dia">
+                            <div class="dia-nombre">${h.dia}</div>
+                            <div class="dia-hora">${h.hora}</div>
+                            ${h.profesor ? `<div class="profesor">Prof: ${h.profesor}</div>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            `).join('');
+        }
+
+        function openAdmin() {
+            document.getElementById('adminModal').classList.add('active');
+        }
+
+        function closeAdmin() {
+            document.getElementById('adminModal').classList.remove('active');
+            document.getElementById('adminForm').style.display = 'block';
+            document.getElementById('adminContent').style.display = 'none';
+            document.getElementById('adminPass').value = '';
+        }
+
+        function checkPass() {
+            const pass = document.getElementById('adminPass').value;
+            if (pass === 'luz2026') {
+                document.getElementById('adminForm').style.display = 'none';
+                document.getElementById('adminContent').style.display = 'block';
+                renderAdmin();
+            } else {
+                alert('Contraseña incorrecta');
+            }
+        }
+
+        function renderAdmin() {
+            const container = document.getElementById('clasesEdit');
+            container.innerHTML = horarios.map((clase, cIndex) => `
+                <div style="margin-bottom:30px;padding:20px;background:#f5f5f5;border-radius:10px;">
+                    <div class="form-group">
+                        <label>Nombre de la clase:</label>
+                        <input type="text" value="${clase.nombre}" onchange="horarios[${cIndex}].nombre=this.value">
+                    </div>
+                    ${clase.horarios.map((h, hIndex) => `
+                        <div class="clase-input">
+                            <input type="text" value="${h.dia}" placeholder="Día" onchange="horarios[${cIndex}].horarios[${hIndex}].dia=this.value">
+                            <input type="text" value="${h.hora}" placeholder="Hora" onchange="horarios[${cIndex}].horarios[${hIndex}].hora=this.value">
+                            <input type="text" value="${h.profesor || ''}" placeholder="Profesor" onchange="horarios[${cIndex}].horarios[${hIndex}].profesor=this.value">
+                            <button class="btn btn-danger" onclick="deleteHorario(${cIndex},${hIndex})">×</button>
+                        </div>
+                    `).join('')}
+                    <button class="btn" style="padding:8px 15px;font-size:13px;" onclick="addHorario(${cIndex})">+ Añadir horario</button>
+                    <button class="btn btn-danger" style="margin-left:10px;padding:8px 15px;font-size:13px;" onclick="deleteClase(${cIndex})">Eliminar clase</button>
+                </div>
+            `).join('');
+        }
+
+        function addClase() {
+            horarios.push({ nombre: "Nueva Clase", horarios: [] });
+            renderAdmin();
+        }
+
+        function addHorario(cIndex) {
+            horarios[cIndex].horarios.push({ dia: "Nuevo día", hora: "Hora", profesor: "" });
+            renderAdmin();
+        }
+
+        function deleteHorario(cIndex, hIndex) {
+            horarios[cIndex].horarios.splice(hIndex, 1);
+            renderAdmin();
+        }
+
+        function deleteClase(cIndex) {
+            horarios.splice(cIndex, 1);
+            renderAdmin();
+        }
+
+        function saveHorarios() {
+            localStorage.setItem('luzvioleta-horarios', JSON.stringify(horarios));
+            renderHorarios();
+            alert('Horarios guardados');
+            closeAdmin();
+        }
+
+        function exportData() {
+            const data = JSON.stringify(horarios, null, 2);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'luzvioleta-horarios.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function importData(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        horarios = JSON.parse(e.target.result);
+                        localStorage.setItem('luzvioleta-horarios', JSON.stringify(horarios));
+                        renderHorarios();
+                        renderAdmin();
+                        alert('Horarios importados correctamente');
+                    } catch (err) {
+                        alert('Error al importar: ' + err.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        // Inicializar
+        renderHorarios();
+    </script>
+</body>
+</html>
