@@ -75,7 +75,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.8rem;
             font-weight: 600;
-            color: var(--violet);
+            color: var(--dark);
             text-decoration: none;
         }
 
@@ -97,13 +97,7 @@
             color: var(--violet);
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+
 
         /* Hero */
         .hero {
@@ -467,14 +461,6 @@
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
             .btn-outline {
                 margin-left: 0;
                 margin-top: 12px;
@@ -507,7 +493,7 @@
                     <li><a href="#yoga">Yoga</a></li>
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
-                <button class="mobile-menu-btn">☰</button>
+
             </nav>
         </div>
     </header>
@@ -700,7 +686,7 @@
                         <p><strong>Bono 10 clases:</strong> 90€</p>
                     </div>
 
-                    <a href="https://wa.me/34937994741?text=Hola, me gustaría reservar una clase de yoga" class="btn btn-primary" style="margin-top: 24px;">Reservar Clase</a>
+
                 </div>
                 <div class="yoga-image">
                     <img src="img/salayoga.jpg" alt="Sala de yoga">
@@ -768,11 +754,6 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-
         // Smooth scroll for nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
